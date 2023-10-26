@@ -40,7 +40,7 @@ with EDA:
     col3, col4 = st.columns(2)
 with col3:
     with st.expander(":blue[# of training images]", expanded=False):
-        dataset_train_dir = './TaskDL/datasets/train'
+        dataset_train_dir = './datasets/train'
         classes_tr = os.listdir(dataset_train_dir)
         st.write("Training: \n")
         for class_tr in classes_tr:
@@ -49,7 +49,7 @@ with col3:
             st.write(f"{class_tr} class, Number of Images: {num_images}")
 with col4:
     with st.expander(":blue[# of testing images]", expanded=False):
-        dataset_test_dir = './TaskDL/datasets/val'
+        dataset_test_dir = './datasets/val'
         classes_te = os.listdir(dataset_test_dir)
         st.write("Test: \n")
         for class_te in classes_te:
@@ -59,14 +59,14 @@ with col4:
 with col3:
     with st.expander(":blue[Example image of the training set]", expanded=False):
         #load and display the image
-        image_path = './TaskDL/datasets/train/sea+turtle/2.jpg'
+        image_path = './datasets/train/sea+turtle/2.jpg'
         img = image.load_img(image_path)
         st.image(img)
 
 with col4:
     with st.expander(":blue[Example image of the test set]", expanded=False):
         #load and display the image
-        image_path = './TaskDL/datasets/val/dolphin/172.jpg'
+        image_path = './datasets/val/dolphin/172.jpg'
         img = image.load_img(image_path)
         st.image(img)
 
@@ -80,19 +80,19 @@ train_val_datagen = ImageDataGenerator(validation_split=0.2,
 
 test_datagen = ImageDataGenerator(rescale = 1./255)
 
-training_set = train_val_datagen.flow_from_directory('./TaskDL/datasets/train',
+training_set = train_val_datagen.flow_from_directory('./datasets/train',
                                                  subset='training',
                                                  target_size = (224, 224),
                                                  batch_size = 32,
                                                  class_mode = 'categorical')
 
-validation_set = train_val_datagen.flow_from_directory('./TaskDL/datasets/train',
+validation_set = train_val_datagen.flow_from_directory('./datasets/train',
                                                  subset='validation',
                                                  target_size = (224, 224),
                                                  batch_size = 32,
                                                  class_mode = 'categorical')
 
-test_set = test_datagen.flow_from_directory('./TaskDL/datasets/val',
+test_set = test_datagen.flow_from_directory('./datasets/val',
                                             target_size = (224, 224),
                                             batch_size = 32,
                                             class_mode = 'categorical')
